@@ -3,20 +3,4 @@
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %></h1>
 </div>
-<% if notice %>
-	<p id="notice"><%= notice %></p>
-<% end %>
-
-<%= form_for @product do |p| %>
-	<% if @product.errors.any? %>
-		<div class="error_messages">
-			<h2>Form is invalid</h2>
-			<ul>
-				<% for message in @product.errors.full_messages %>
-					<li><%= message %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-<% end %>
 <%= render :partial => 'form' %>
