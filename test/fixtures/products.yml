@@ -7,3 +7,7 @@ one:
 two:
   title: MyString
   brand_id: 1
+
+hairdress:
+  title: hairdress
+  brand_id: 2
