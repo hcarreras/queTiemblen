@@ -24,7 +24,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   # GET /products/new.json
   def new
-    @product = Product.new
+    @brand = Brand.find(params[:brand_id])
+    @product = Product.new(:brand_id => @brand.id)
 
     respond_to do |format|
       format.html # new.html.erb

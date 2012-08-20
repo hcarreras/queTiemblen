@@ -1,6 +1,6 @@
 Quetiemblen::Application.routes.draw do
-  resources :brands
 
+  resources :brands
   resources :products
 
   # The priority is based upon order of creation:
