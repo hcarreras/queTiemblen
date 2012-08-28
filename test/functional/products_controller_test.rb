@@ -3,9 +3,13 @@ require 'test_helper'
 class ProductsControllerTest < ActionController::TestCase
   setup do
     @product = products(:one)
+    @brand = brands(:one)
+
     @update = {
-      :title  => 'LG prymus 234'
+      :title  => 'prymus 234',
+      :brand_id => @brand.id
     }
+
   end
 
   test "should get index" do
@@ -15,7 +19,7 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, brand_id: @brand
     assert_response :success
   end
 

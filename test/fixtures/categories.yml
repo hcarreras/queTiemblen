@@ -2,12 +2,8 @@
 
 one:
   name: MyString
-  category_id: 1
+  super_category_id: 1
 
 two:
   name: MyString
-  category_id: 1
-
-apple:
-  name: Apple
-  category_id: 2
+  super_category_id: 1

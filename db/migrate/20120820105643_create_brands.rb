@@ -2,7 +2,7 @@ class CreateBrands < ActiveRecord::Migration
   def change
     create_table :brands do |t|
       t.string :name
-      t.integer :category_id
+      t.array :categories_id
 
       t.timestamps
     end

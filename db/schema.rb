@@ -11,14 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820105643) do
+ActiveRecord::Schema.define(:version => 20120827162734) do
 
-  create_table "brands", :force => true do |t|
-    t.string   "name"
-    t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
+# Could not dump table "brands" because of following StandardError
+#   Unknown type 'array' for column 'categories_id'
+
+# Could not dump table "categories" because of following StandardError
+#   Unknown type 'array' for column 'brands_id'
 
   create_table "products", :force => true do |t|
     t.string   "title"

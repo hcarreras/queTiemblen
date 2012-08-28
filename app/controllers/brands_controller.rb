@@ -40,7 +40,14 @@ class BrandsController < ApplicationController
   # POST /brands
   # POST /brands.json
   def create
-    @brand = Brand.new(params[:brand])
+    @brand = Brand.find_by_name(params[:name])
+
+    if @brand
+      @brand.categories_id = @brand.categories_id + params[:brand][:categories_id]
+      @brand.save
+    else
+      Brand.create(params[:brand])
+    end
 
     respond_to do |format|
       if @brand.save
