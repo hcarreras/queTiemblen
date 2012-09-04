@@ -40,6 +40,7 @@ class BrandsController < ApplicationController
   # POST /brands
   # POST /brands.json
   def create
+
     @brand = Brand.find_by_name(params[:name])
 
     if @brand
@@ -48,6 +49,7 @@ class BrandsController < ApplicationController
     else
       Brand.create(params[:brand])
     end
+
 
     respond_to do |format|
       if @brand.save
