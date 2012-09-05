@@ -23,7 +23,7 @@
   <div class="control-group">
     <%= f.label :category_ids, :class => 'control-label' %>
     <div class="controls">
-     <%= collection_select(:brand, :category_ids, Category.all, :id, :name) %>
+     <%= collection_select(:brand, :category_ids, Category.all, :id, :name, :multiple => true) %>
     </div>
   </div>
 
