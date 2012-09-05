@@ -11,10 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827162734) do
+ActiveRecord::Schema.define(:version => 20120905145914) do
 
 # Could not dump table "brands" because of following StandardError
 #   Unknown type 'array' for column 'categories_id'
+
+  create_table "brands_categories", :id => false, :force => true do |t|
+    t.integer "brand_id"
+    t.integer "category_id"
+  end
+
+  add_index "brands_categories", ["brand_id", "category_id"], :name => "index_brands_categories_on_brand_id_and_category_id"
 
 # Could not dump table "categories" because of following StandardError
 #   Unknown type 'array' for column 'brands_id'

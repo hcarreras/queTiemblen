@@ -10,6 +10,14 @@
   <dd><%= @category.super_category_id %></dd>
 </dl>
 
+<h3> Brands </h3>
+
+<% @category.brands.each do |b| %>
+  <p><%= link_to b.name, brand_path(b) %></p>
+<%end%>
+
+
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               categories_path, :class => 'btn'  %>

@@ -21,9 +21,9 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :category_id, :class => 'control-label' %>
+    <%= f.label :category_ids, :class => 'control-label' %>
     <div class="controls">
-      <%= select("category", "category_id", Category.all.collect {|c| [ c.name, c.id ] }, { :include_blank => true }) %>
+     <%= collection_select(:brand, :category_ids, Category.all, :id, :name) %>
     </div>
   </div>
 

@@ -7,7 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:category_id) %></th>
+      <th><%= model_class.human_attribute_name(:category_ids) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to brand.id, brand_path(brand) %></td>
         <td><%= brand.name %></td>
-        <td><%= brand.category_id %></td>
+        <td><%= brand.category_ids %></td>
         <td><%=l brand.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
