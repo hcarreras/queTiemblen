@@ -3,7 +3,7 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.string :name
       t.integer :super_category_id
-      t.array :brands_id
+
 
       t.timestamps
     end

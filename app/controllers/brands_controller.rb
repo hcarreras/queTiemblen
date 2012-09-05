@@ -44,7 +44,7 @@ class BrandsController < ApplicationController
     @brand = Brand.find_by_name(params[:name])
 
     if @brand
-      @brand.category_ids << params[:id]
+      @brand.category_ids = @brand.category_ids << params[:id]
     else
       @brand = Brand.create(params[:brand])
     end

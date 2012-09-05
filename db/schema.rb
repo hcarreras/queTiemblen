@@ -13,8 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20120905145914) do
 
-# Could not dump table "brands" because of following StandardError
-#   Unknown type 'array' for column 'categories_id'
+  create_table "brands", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "brands_categories", :id => false, :force => true do |t|
     t.integer "brand_id"
@@ -23,8 +26,12 @@ ActiveRecord::Schema.define(:version => 20120905145914) do
 
   add_index "brands_categories", ["brand_id", "category_id"], :name => "index_brands_categories_on_brand_id_and_category_id"
 
-# Could not dump table "categories" because of following StandardError
-#   Unknown type 'array' for column 'brands_id'
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "super_category_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "products", :force => true do |t|
     t.string   "title"
