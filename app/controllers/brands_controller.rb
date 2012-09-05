@@ -41,13 +41,13 @@ class BrandsController < ApplicationController
   # POST /brands.json
   def create
 
-    @brand = Brand.find_by_name(params[:name])
+  @brand = Brand.find_by_name(params[:brand][:name])
 
-    if @brand
-      @brand.category_ids << params[:brand][:category_ids]
-    else
-      @brand = Brand.create(params[:brand])
-    end
+  if @brand
+    @brand.category_ids = @brand.category_ids << params[:brand][:category_ids]
+  else
+    @brand = Brand.create(params[:brand])
+  end
 
 
     respond_to do |format|
@@ -63,14 +63,19 @@ class BrandsController < ApplicationController
 
   # PUT /brands/1
   # PUT /brands/1.json
-def update
-   @brand = Brand.find(params[:id])
+  def update
+    @brand = Brand.find(params[:id])
 
-   @brand.category_ids = @brand.category_ids << params[:brand][:category_ids]
-   @brand.save
-
-   redirect_to @brand
- end
+    respond_to do |format|
+      if @brand.update_attributes(params[:brand])
+        format.html { redirect_to @brand, notice: 'Brand was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @brand.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /brands/1
   # DELETE /brands/1.json
