@@ -42,6 +42,12 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
+    @brand = Brand.find_by_id(params[:product][:brand_id])
+    @category = Category.find_by_id(params[:product][:category_id])
+
+    if(not @category.brand_ids.include?(@brand.id))
+      @brand.category_ids = @brand.category_ids << @category.id
+    end
 
     respond_to do |format|
       if @product.save

@@ -23,6 +23,13 @@
     <%= f.hidden_field :brand_id %>
   </div>
 
+  <div class="control-group">
+    <%= f.label :category_id, :class => 'control-label' %>
+    <div class="controls">
+     <%= collection_select(:product, :category_id, Category.all, :id, :name) %>
+    </div>
+  </div>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
