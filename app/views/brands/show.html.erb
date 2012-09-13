@@ -15,10 +15,38 @@
 </dl>
 
 <h3>Products</h3>
-
-<% @brand.products.each do |p| %>
-  <p><%= link_to p.title, product_path(p) %></p>
-<%end%>
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Created at </th>
+      <th> Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @brand.products.each do |p| %>
+      <tr>
+        <td><%= link_to p.title, product_path(p) %></td>
+        <td><%=l p.created_at %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_product_path(p), :class => "btn btn-warning btn-small" %>
+            <button class="btn dropdown-toggle btn-warning btn-small" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu btn-danger btn-small">
+               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      product_path(p),
+                      :method => :delete,
+                      :data => { :confirm => 'Are you sure?' }%>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
 
 
 <%= link_to "New product", new_product_path(:brand_id => @brand.id), class: "btn" %>

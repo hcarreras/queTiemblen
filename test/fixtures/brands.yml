@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   name: MyString
-  category_id: 1
 
 two:
+  id: 2
   name: MyString
-  category_id: 1
 
-apple:
-  name: Apple
-  category_id: 2
+adidas:
+  id: 3
+  name: Adidas
