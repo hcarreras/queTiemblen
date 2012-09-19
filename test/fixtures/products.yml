@@ -3,11 +3,14 @@
 one:
   title: MyString
   brand_id: 1
+  category_id: 1
 
 two:
   title: MyString
   brand_id: 1
+  category_id: 2
 
 hairdress:
   title: hairdress
   brand_id: 2
+  category_id: 4

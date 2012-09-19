@@ -1,0 +1,22 @@
+<h1>Catalog</h1>
+
+<p></p>
+<div class="tabbable tabs-left" id ="myTab">
+  <ul class="nav nav-tabs">
+  	<% @super_categories.each do |sc| %>
+  	  <li><%= link_to sc.name, "#" + sc.name.to_s, :data => {:toggle => "tab"} %></a></li>
+  	<% end %>
+  </ul>
+  <div class="tab-content">
+  	<% @super_categories.each do |sc| %>
+    	<div id = <%=sc.name.to_s%> class = "tab-pane"> 
+    	  <% sc.categories.each do |cat|%>
+    	  	<p><%= link_to cat.name, category_path(cat) %></p>
+    	  <% end %>
+    	</div>
+    <% end %>
+  </div>
+</div>
+ 
+
+

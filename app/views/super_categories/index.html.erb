@@ -1,4 +1,4 @@
-<%- model_class = Category.new.class -%>
+<%- model_class = SuperCategory.new.class -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
@@ -7,23 +7,21 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:super_category_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @categories.each do |category| %>
+    <% @super_categories.each do |super_category| %>
       <tr>
-        <td><%= link_to category.id, category_path(category) %></td>
-        <td><%= category.name %></td>
-        <td><%= link_to category.super_category.name, super_category_path(category.super_category) %></td>
-        <td><%=l category.created_at %></td>
+        <td><%= link_to super_category.id, super_category_path(super_category) %></td>
+        <td><%= super_category.name %></td>
+        <td><%=l super_category.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_category_path(category), :class => 'btn btn-mini' %>
+                      edit_super_category_path(super_category), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      category_path(category),
+                      super_category_path(super_category),
                       :method => :delete,
                       :data => { :confirm => 'Are you sure?' },
                       :class => 'btn btn-mini btn-danger' %>
@@ -34,5 +32,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_category_path,
+            new_super_category_path,
             :class => 'btn btn-primary' %>

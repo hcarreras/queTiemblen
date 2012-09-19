@@ -3,6 +3,12 @@ require 'test_helper'
 class CategoriesControllerTest < ActionController::TestCase
   setup do
     @category = categories(:one)
+    @super_category = super_categories(:one)
+
+    @update ={
+      :name => 'bike',
+      :super_category_id => @super_category.id
+    }
   end
 
   test "should get index" do

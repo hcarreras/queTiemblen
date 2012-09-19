@@ -1,16 +1,14 @@
-<%- model_class = @category.class -%>
+<%- model_class = @super_category.class -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @category.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:super_category_id) %>:</strong></dt>
-  <dd><%= link_to @category.super_category.name, super_category_path(@category.super_category)%></dd>
+  <dd><%= @super_category.name %></dd>
 </dl>
 
-<h3> Brands </h3>
+<h2> Categories </h2>
 
 <table class = "table table-striped">
   <thead>
@@ -19,22 +17,25 @@
     </tr>
   </thead>
   <tbody>
-    <% @category.brands.each do |b| %>
+    <% @super_category.categories.each do |c| %>
       <tr>
-        <td><%= link_to b.name, brand_path(b) %></td>
+        <td> <%= link_to c.name, category_path(c) %> </td>
       </tr>
-    <%end%>
+    <% end %>
   </tbody>
 </table>
 
 
+
+
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              categories_path, :class => 'btn'  %>
+              super_categories_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_category_path(@category), :class => 'btn' %>
+              edit_super_category_path(@super_category), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              category_path(@category),
+              super_category_path(@super_category),
               :method => 'delete',
               :data => { :confirm => 'Are you sure?' },
               :class => 'btn btn-danger' %>

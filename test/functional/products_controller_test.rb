@@ -4,10 +4,12 @@ class ProductsControllerTest < ActionController::TestCase
   setup do
     @product = products(:one)
     @brand = brands(:one)
+    @category = categories(:one)
 
     @update = {
       :title  => 'prymus 234',
-      :brand_id => @brand.id
+      :brand_id => @brand.id,
+      :category_id => @category.id
     }
 
   end

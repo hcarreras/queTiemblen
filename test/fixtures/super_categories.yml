@@ -7,11 +7,3 @@ one:
 two:
   id: 2
   name: MyString
-
-adidas:
-  id: 3
-  name: Adidas
-
-ikea:
-  id: 4
-  name: ikea

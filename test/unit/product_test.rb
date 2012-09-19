@@ -7,6 +7,8 @@ class ProductTest < ActiveSupport::TestCase
 
   fixtures :products
   fixtures :brands
+  fixtures :categories
+  fixtures :brands_categories
 
   test "Product attributes must not be empty" do
   	product = Product.new
@@ -16,7 +18,7 @@ class ProductTest < ActiveSupport::TestCase
 
   test "Product is not valid without a unique title in the same brand" do
   	product = Product.new(:title	=> products(:hairdress).title,
-  						  :brand_id => products(:hairdress).brand_id)
+  						  :brand_id => products(:hairdress).brand_id, :category_id => products(:hairdress).category_id)
   	assert !product.save
   	assert_equal "The product already exists", product.errors[:title].join('; ')
 
@@ -31,7 +33,7 @@ class ProductTest < ActiveSupport::TestCase
 
 
   test "Product must have a valid brand" do
-    product = Product.new(:title => "unicorn")
+    product = Product.new(:title => "unicorn", :category_id => products(:one).category_id)
     assert !product.save
     #assert_equal "The brand no exists", product.errors[:brand_id].join('; ')
 
@@ -43,4 +45,22 @@ class ProductTest < ActiveSupport::TestCase
 
   end
 
+  test "Product must have a valid category" do
+    product = Product.new(:title => "unicorn", :brand_id => products(:one).brand_id)
+    assert !product.save
+
+    product.category_id = products(:one).category_id
+    assert product.save
+  end
+
+  test "The brand allways belongs to a category" do
+    category = categories(:bath)
+    brand = brands(:ikea)
+    product = Product.new(:title => "towell", :brand_id => brand.id, :category_id => category.id )
+    assert product.save
+    assert brand.save
+    assert category.save
+    #If the brand don't belongs to that category, then automatically be included
+    assert brand.category_ids.include?(category.id)
+  end
 end
