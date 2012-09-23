@@ -23,6 +23,14 @@ end
 
 gem 'jquery-rails'
 
+#Upload images
+gem 'carrierwave'
+
+gem 'carrierwave_direct'
+
+gem "rmagick"
+
+gem "mini_magick"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

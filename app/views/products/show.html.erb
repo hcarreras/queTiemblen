@@ -4,6 +4,7 @@
 </div>
 
 <dl class="dl-horizontal">
+  <p><dd> <%= image_tag @product.image_url(:thumb).to_s if @product.image? %></dd> </p>
   <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
   <dd><%= @product.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:brand_id) %>:</strong></dt>
@@ -12,7 +13,7 @@
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              products_path, :class => 'btn'  %>
+              brand_path(@product.brand), :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_product_path(@product), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
