@@ -14,6 +14,7 @@ class BrandsController < ApplicationController
   # GET /brands/1.json
   def show
     @brand = Brand.find(params[:id])
+    @comment = Comment.new(:brand_id => @brand.id)
 
     respond_to do |format|
       format.html # show.html.erb

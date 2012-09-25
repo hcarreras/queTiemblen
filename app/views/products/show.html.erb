@@ -1,15 +1,37 @@
 <%- model_class = @product.class -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%=@product.title %></h1>
 </div>
 
 <dl class="dl-horizontal">
   <p><dd> <%= image_tag @product.image_url(:thumb).to_s if @product.image? %></dd> </p>
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @product.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:brand_id) %>:</strong></dt>
   <dd><%= link_to @product.brand.name, brand_path(@product.brand) %></dd>
 </dl>
+
+<div id="comments">
+  <h3>Comments</h3>
+
+  <% @product.comments.each do |comment| %>
+    <div class="well">
+      <%= simple_format comment.body %>
+      <%= link_to 'Edit', edit_comment_path(comment), :class => 'btn btn-mini btn-success' %>
+      <%= link_to 'Destroy', comment_path(comment), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+    </div>
+  <% end %>
+</div>
+
+<p></p>
+<%= form_for @comment do |f| %>
+
+  <%= f.hidden_field :product_id %>
+  <div class="field">
+    <%= f.text_area :body, :size => "25x5" %>
+  </div>
+  <div class="field">
+    <%= f.submit 'Enviar comentario', :class => 'btn primary' %>
+  </div>
+<% end  %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

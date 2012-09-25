@@ -3,6 +3,8 @@ class Product < ActiveRecord::Base
   belongs_to :brand
   belongs_to :category
 
+  has_many :comments, :dependent => :destroy
+
   mount_uploader :image, ImageUploader
 
   validates :title, :presence => true, :uniqueness => { :scope => :brand_id, :case_sensitive => false, :message => 'The product already exists' }

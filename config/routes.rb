@@ -1,5 +1,7 @@
 Quetiemblen::Application.routes.draw do
 
+  resources :comments
+
   get "catalog" => "catalog#index", :as => "catalog"
 
   resources :super_categories
