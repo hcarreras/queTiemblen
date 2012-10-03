@@ -15,6 +15,7 @@ class BrandsController < ApplicationController
   def show
     @brand = Brand.find(params[:id])
     @comment = Comment.new(:brand_id => @brand.id)
+    @comments = @brand.comments
 
     respond_to do |format|
       format.html # show.html.erb

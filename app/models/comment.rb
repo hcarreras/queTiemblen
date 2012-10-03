@@ -6,4 +6,5 @@ class Comment < ActiveRecord::Base
 
   validates :brand, :presence => {:unless => :product_id?, :message => "The comment must belongs to a brand or product"}
   validates :product, :presence => {:unless => :brand_id?, :message => "The comment must belongs to a brand or product"}
+  validates :body, :presence => true
 end

@@ -11,3 +11,12 @@ two:
   product_id: 1
   brand_id: 1
   user_id: 1
+
+product_comment:
+  body: One body
+  product_id: 1
+  user_id: 1
+
+brand_comment:
+  body: Other body
+  brand_id: 1

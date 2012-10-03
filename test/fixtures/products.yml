@@ -1,16 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   title: MyString
   brand_id: 1
   category_id: 1
 
 two:
+  id: 2
   title: MyString
   brand_id: 1
   category_id: 2
 
 hairdress:
+  id: 3
   title: hairdress
   brand_id: 2
   category_id: 4
