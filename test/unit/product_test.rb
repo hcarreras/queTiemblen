@@ -55,11 +55,12 @@ class ProductTest < ActiveSupport::TestCase
 
   test "The brand allways belongs to a category" do
     category = categories(:bath)
+    assert category.save
     brand = brands(:ikea)
+    assert brand.save
     product = Product.new(:title => "towell", :brand_id => brand.id, :category_id => category.id )
     assert product.save
-    assert brand.save
-    assert category.save
+
     #If the brand don't belongs to that category, then automatically be included
     assert brand.category_ids.include?(category.id)
   end

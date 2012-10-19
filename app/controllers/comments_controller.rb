@@ -41,18 +41,35 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
-    @brand = Brand.find(params[:comment][:brand_id])
+    if(Brand.exists?(params[:comment][:brand_id]))
+      @brand = Brand.find(params[:comment][:brand_id])
 
-    respond_to do |format|
-      if @comment.save
-        @comments = @comment.brand.comments
-        format.html { redirect_to @brand, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment, status: :created, location: @comment }
-        format.js { render @brand}
-      else
-        format.html { render action: "new" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-        format.js
+      respond_to do |format|
+        if @comment.save
+          @comments = @comment.brand.comments
+          format.html { redirect_to @brand, notice: 'Comment was successfully created.' }
+          format.json { render json: @comment, status: :created, location: @comment }
+          format.js
+        else
+          format.html { redirect_to :back, notice: "Your comment is not valid."}
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+          format.js
+        end
+      end
+    else
+      @product = Product.find(params[:comment][:product_id])
+    
+      respond_to do |format|
+        if @comment.save
+          @comments = @comment.product.comments
+          format.html { redirect_to @product, notice: 'Comment was successfully created.' }
+          format.json { render json: @comment, status: :created, location: @comment }
+          format.js
+        else
+          format.html { redirect_to :back, notice: "Your comment is not valid" }
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+          format.js
+        end
       end
     end
   end

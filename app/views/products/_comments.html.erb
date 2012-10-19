@@ -1,6 +1,6 @@
 <div class="well">
 	<b><%= comments.title %></b>
-    <p></p>
+	<p></p>
 	<%= simple_format comments.body %>
 	<%= link_to 'Edit', edit_comment_path(comments), :class => 'btn btn-mini btn-success' %>
 	<%= link_to 'Destroy', comment_path(comments), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger' %>

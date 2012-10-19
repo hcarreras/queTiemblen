@@ -2,45 +2,57 @@
 <div class="page-header">
   <h1><%=@product.title %></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <p><dd> <%= image_tag @product.image_url(:thumb).to_s if @product.image? %></dd> </p>
-  <dt><strong><%= model_class.human_attribute_name(:brand_id) %>:</strong></dt>
-  <dd><%= link_to @product.brand.name, brand_path(@product.brand) %></dd>
-</dl>
-
-<div id="comments">
-  <h3>Comments</h3>
-
-  <% @product.comments.each do |comment| %>
-    <div class="well">
-      <%= simple_format comment.body %>
-      <%= link_to 'Edit', edit_comment_path(comment), :class => 'btn btn-mini btn-success' %>
-      <%= link_to 'Destroy', comment_path(comment), :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger' %>
+<div class = "row"> 
+  <div class = "span5">
+    <dl class="dl-horizontal">
+      <p><dd> <%= image_tag @product.image_url.to_s if @product.image? %></dd> </p>
+    <h2>Comments</h2>
+    <div id="comments">
+      <%= render :partial => "comments", :collection => @comments %>
     </div>
-  <% end %>
-</div>
+    <p></p>
 
-<p></p>
-<%= form_for @comment do |f| %>
+    <div id="comment-form">
+      <%= form_for @comment, :remote => true do |f| %>
+        <%= f.hidden_field :product_id %>
+        <div class="field">
+          <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words"%>
+        </div>        
+        <div class="field">
+          <%= f.text_area :body, :size => "25x5", :placeholder => "Explain us all your experience here"%>
+        </div>
+        <div class="field">
+          <%= f.submit 'Enviar comentario', :class => 'btn btn-success' %>
+        </div>
+      <% end  %>  
+    </div> 
 
-  <%= f.hidden_field :product_id %>
-  <div class="field">
-    <%= f.text_area :body, :size => "25x5" %>
+    <div class="form-actions">
+      <%= link_to t('.back', :default => t("helpers.links.back")),
+                  brand_path(@product.brand), :class => 'btn'  %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_product_path(@product), :class => 'btn' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  product_path(@product),
+                  :method => 'delete',
+                  :data => { :confirm => 'Are you sure?' },
+                  :class => 'btn btn-danger' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.submit 'Enviar comentario', :class => 'btn primary' %>
-  </div>
-<% end  %>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              brand_path(@product.brand), :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_product_path(@product), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              product_path(@product),
-              :method => 'delete',
-              :data => { :confirm => 'Are you sure?' },
-              :class => 'btn btn-danger' %>
+  <div class = "span4 comments">
+    <div class="centered">
+      <h2><%= link_to @product.brand.name + " Comments", brand_path(@product.brand), :class => 'link_without_style' %></h2>
+    </div>
+    <p></p>
+    <div class = "well well-hari">
+      <% @product.brand.comments.each do |brand_comment| %>
+        <div class = "separated">
+          <b><%= brand_comment.title %></b>
+          <p></p>
+          <%= simple_format brand_comment.body %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

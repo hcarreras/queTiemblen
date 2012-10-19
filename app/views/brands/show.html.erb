@@ -15,7 +15,10 @@
       <%= form_for @comment, :remote => true do |f| %>
         <%= f.hidden_field :brand_id %>
         <div class="field">
-          <%= f.text_area :body, :size => "25x5"%>
+          <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words"%>
+        </div>        
+        <div class="field">
+          <%= f.text_area :body, :size => "25x5", :placeholder => "Explain us all your experience here"%>
         </div>
         <div class="field">
           <%= f.submit 'Enviar comentario', :class => 'btn btn-success' %>
@@ -28,6 +31,7 @@
     <table class = "table table-striped">
       <thead>
         <tr>
+          <th>Image</th>
           <th> Name </th>
           <th> Actions </th>
         </tr>
@@ -35,6 +39,7 @@
       <tbody>
         <% @brand.products.each do |p| %>
           <tr>
+            <td><%= image_tag p.image_url(:thumb).to_s if p.image? %></td>
             <td><%= link_to p.title, product_path(p) %></td>
             <td>
               <div class="btn-group">
