@@ -28,10 +28,15 @@
                       :data => { :confirm => 'Are you sure?'},
                       :class => 'btn btn-mini btn-danger' %>
         </td>
-      </tr>
+      </tr>      
     <% end %>
-    <p><%= will_paginate @products %></p>
   </tbody>
 </table>
+
+<div class="pagination">
+  <ul>
+    <li><%= will_paginate @products %></li>
+  </ul>
+</div>
 
 

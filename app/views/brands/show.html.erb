@@ -6,25 +6,27 @@
 <div class = "row">
   <div class = "span5">
     <h2>Comments</h2>
-    <div id="comments">
-      <%= render :partial => "comments", :collection => @comments %>
-    </div>
-    <p></p>
 
     <div id="comment-form">
       <%= form_for @comment, :remote => true do |f| %>
-        <%= f.hidden_field :brand_id %>
-        <div class="field">
-          <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words"%>
-        </div>        
-        <div class="field">
-          <%= f.text_area :body, :size => "25x5", :placeholder => "Explain us all your experience here"%>
-        </div>
-        <div class="field">
-          <%= f.submit 'Enviar comentario', :class => 'btn btn-success' %>
-        </div>
+      <%= f.hidden_field :brand_id %>
+      <div class="field">
+        <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words"%>
+      </div>        
+      <div class="field">
+        <%= f.text_area :body, :size => "25x5", :placeholder => "Explain us all your experience here"%>
+      </div>
+      <div class="field">
+        <%= f.submit 'Enviar comentario', :class => 'btn btn-success' %>
+      </div>
       <% end  %>  
-    </div>  
+    </div> 
+
+    <div id="comments">
+      <%= render  @comments %>
+    </div>
+    <p></p>
+
   </div>
   <div class = "span4">
     <h2>Products</h2>
@@ -38,54 +40,54 @@
       </thead>
       <tbody>
         <% @brand.products.each do |p| %>
-          <tr>
-            <td><%= image_tag p.image_url(:thumb).to_s if p.image? %></td>
-            <td><%= link_to p.title, product_path(p) %></td>
-            <td>
-              <div class="btn-group">
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_product_path(p), :class => "btn btn-warning btn-small" %>
-                <button class="btn dropdown-toggle btn-warning btn-small" data-toggle="dropdown">
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu btn-danger btn-small">
-                   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          product_path(p),
-                          :method => :delete,
-                          :data => { :confirm => 'Are you sure?' }%>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        <%end%>
-      </tbody>
-    </table>
+        <tr>
+          <td><%= image_tag p.image_url(:thumb).to_s if p.image? %></td>
+          <td><%= link_to p.title, product_path(p) %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_product_path(p), :class => "btn btn-warning btn-small" %>
+              <button class="btn dropdown-toggle btn-warning btn-small" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu btn-danger btn-small">
+               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+               product_path(p),
+               :method => :delete,
+               :data => { :confirm => 'Are you sure?' }%>
+             </ul>
+           </div>
+         </td>
+       </tr>
+       <%end%>
+     </tbody>
+   </table>
 
-    <div class="well">
-      <h3>Don't find what you want?</h3>
-      <p>Create a new product in 10 seconds and criticize your shopping.</p>
-      <p></p>
-      <p>
-        <%= link_to "New product", new_product_path(:brand_id => @brand.id), class: "btn btn-primary btn-large" %>
-      </p>
-    </div>
+   <div class="well">
+    <h3>Don't find what you want?</h3>
+    <p>Create a new product in 10 seconds and criticize your shopping.</p>
+    <p></p>
+    <p>
+      <%= link_to "New product", new_product_path(:brand_id => @brand.id), class: "btn btn-primary btn-large" %>
+    </p>
   </div>
+</div>
 </div>
 
 
 <strong><%= model_class.human_attribute_name(:category_ids) %>:</strong>
 <% @brand.categories.each do |cat| %>
-  <%= link_to cat.name, category_path(cat) %>  
+<%= link_to cat.name, category_path(cat) %>  
 <% end %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              brands_path, :class => 'btn'  %>
+  brands_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_brand_path(@brand), :class => 'btn' %>
+  edit_brand_path(@brand), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              brand_path(@brand),
-              :method => 'delete',
-              :data => { :confirm => 'Are you sure?' },
-              :class => 'btn btn-danger' %>
+  brand_path(@brand),
+  :method => 'delete',
+  :data => { :confirm => 'Are you sure?' },
+  :class => 'btn btn-danger' %>
 </div>

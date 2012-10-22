@@ -6,14 +6,10 @@
   <div class = "span5">
     <dl class="dl-horizontal">
       <p><dd> <%= image_tag @product.image_url.to_s if @product.image? %></dd> </p>
-    <h2>Comments</h2>
-    <div id="comments">
-      <%= render :partial => "comments", :collection => @comments %>
-    </div>
-    <p></p>
+      <h2>Comments</h2>
 
-    <div id="comment-form">
-      <%= form_for @comment, :remote => true do |f| %>
+      <div id="comment-form">
+        <%= form_for @comment, :format => :js, :remote => true do |f| %>
         <%= f.hidden_field :product_id %>
         <div class="field">
           <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words"%>
@@ -24,35 +20,46 @@
         <div class="field">
           <%= f.submit 'Enviar comentario', :class => 'btn btn-success' %>
         </div>
-      <% end  %>  
-    </div> 
+        <% end  %>  
+      </div>
 
-    <div class="form-actions">
-      <%= link_to t('.back', :default => t("helpers.links.back")),
-                  brand_path(@product.brand), :class => 'btn'  %>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_product_path(@product), :class => 'btn' %>
-      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  product_path(@product),
-                  :method => 'delete',
-                  :data => { :confirm => 'Are you sure?' },
-                  :class => 'btn btn-danger' %>
-    </div>
-  </div>
+      <div id="comments">
+        <%= render @comments %>
+      </div>
+      <p></p>
 
-  <div class = "span4 comments">
-    <div class="centered">
-      <h2><%= link_to @product.brand.name + " Comments", brand_path(@product.brand), :class => 'link_without_style' %></h2>
+      <div class="pager">
+        <ul>
+          <li><%= will_paginate @comments %></li>
+        </ul>
+      </div>
+
+      <div class="form-actions">
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+        brand_path(@product.brand), :class => 'btn'  %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+        edit_product_path(@product), :class => 'btn' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        product_path(@product),
+        :method => 'delete',
+        :data => { :confirm => 'Are you sure?' },
+        :class => 'btn btn-danger' %>
+      </div>
     </div>
-    <p></p>
-    <div class = "well well-hari">
-      <% @product.brand.comments.each do |brand_comment| %>
+
+    <div class = "span4 comments">
+      <div class="centered">
+        <h2><%= link_to @product.brand.name + " Comments", brand_path(@product.brand), :class => 'link_without_style' %></h2>
+      </div>
+      <p></p>
+      <div class = "well well-hari">
+        <% @product.brand.comments.each do |brand_comment| %>
         <div class = "separated">
           <b><%= brand_comment.title %></b>
           <p></p>
           <%= simple_format brand_comment.body %>
         </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>

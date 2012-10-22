@@ -7,4 +7,6 @@ class Comment < ActiveRecord::Base
   validates :brand, :presence => {:unless => :product_id?, :message => "The comment must belongs to a brand or product"}
   validates :product, :presence => {:unless => :brand_id?, :message => "The comment must belongs to a brand or product"}
   validates :title, :presence => true, :length => {:in => 2..30, :message => "The comment it's too long or too short"}
+
+	default_scope :order => 'created_at DESC'
 end

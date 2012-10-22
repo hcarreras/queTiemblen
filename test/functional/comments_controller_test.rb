@@ -20,18 +20,14 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should create brand comment" do
     assert_difference('Comment.count') do
-      post :create, comment: { title: @brand_comment.title, body: @brand_comment.body, brand_id: @brand_comment.brand_id, user_id: @brand_comment.user_id }
+      xhr :post, :create, comment: { title: @brand_comment.title, body: @brand_comment.body, brand_id: @brand_comment.brand_id, user_id: @brand_comment.user_id }
     end
-
-    assert_redirected_to brand_path(@brand_comment.brand_id)
   end
 
   test "should create product comment" do
     assert_difference('Comment.count') do
-      post :create, comment: { title: @product_comment.title, body: @product_comment.body, product_id: @product_comment.product_id, user_id: @product_comment.user_id }
+      xhr :post, :create, comment: { title: @product_comment.title, body: @product_comment.body, product_id: @product_comment.product_id, user_id: @product_comment.user_id }
     end
-
-    assert_redirected_to product_path(@product_comment.product_id)
   end
 
 
@@ -52,9 +48,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, id: @comment
+      xhr :delete, :destroy, id: @comment
     end
-
-    assert_redirected_to comments_path
   end
 end

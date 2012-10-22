@@ -1,10 +1,12 @@
+require 'will_paginate/array'
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.paginate(:page => params[:page], :per_page => 10)
+    @products = Product.all
 
     respond_to do |format|
+      @products = @products.paginate(:page => params[:page], :per_page => 10)
       format.html # index.html.erb
       format.json { render json: @products }
     end
@@ -19,6 +21,7 @@ class ProductsController < ApplicationController
 
 
     respond_to do |format|
+      @comments = @comments.paginate(:page => params[:page], :per_page => 5)      
       format.html # show.html.erb
       format.json { render json: @product }
     end
@@ -48,20 +51,18 @@ class ProductsController < ApplicationController
     @brand = Brand.find_by_id(params[:product][:brand_id])
     @category = Category.find_by_id(params[:product][:category_id])
 
-    if(not @category.brand_ids.include?(@brand.id))
+    #The category always must have this brand (not always belongs to that category when we create the product)
+    unless @category.brand_ids.include?(@brand.id)
       @brand.category_ids = @brand.category_ids << @category.id
     end
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render json: @product, status: :created, location: @product }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    if @product.save
+      redirect_to @product, notice: 'Product was successfully created.' 
+    else
+      render action: "new" 
     end
   end
+  
 
   # PUT /products/1
   # PUT /products/1.json

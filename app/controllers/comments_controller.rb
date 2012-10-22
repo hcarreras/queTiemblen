@@ -41,37 +41,9 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
-    if(Brand.exists?(params[:comment][:brand_id]))
-      @brand = Brand.find(params[:comment][:brand_id])
 
-      respond_to do |format|
-        if @comment.save
-          @comments = @comment.brand.comments
-          format.html { redirect_to @brand, notice: 'Comment was successfully created.' }
-          format.json { render json: @comment, status: :created, location: @comment }
-          format.js
-        else
-          format.html { redirect_to :back, notice: "Your comment is not valid."}
-          format.json { render json: @comment.errors, status: :unprocessable_entity }
-          format.js
-        end
-      end
-    else
-      @product = Product.find(params[:comment][:product_id])
-    
-      respond_to do |format|
-        if @comment.save
-          @comments = @comment.product.comments
-          format.html { redirect_to @product, notice: 'Comment was successfully created.' }
-          format.json { render json: @comment, status: :created, location: @comment }
-          format.js
-        else
-          format.html { redirect_to :back, notice: "Your comment is not valid" }
-          format.json { render json: @comment.errors, status: :unprocessable_entity }
-          format.js
-        end
-      end
-    end
+    @comment.save!
+
   end
 
   # PUT /comments/1
@@ -95,10 +67,5 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to comments_url }
-      format.json { head :no_content }
-    end
   end
 end

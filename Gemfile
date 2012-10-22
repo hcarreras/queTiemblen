@@ -33,6 +33,10 @@ gem "rmagick"
 gem "mini_magick"
 
 gem 'will_paginate', '~> 3.0.0'
+
+gem 'therubyracer', '~> 0.11.0beta5'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
