@@ -26,6 +26,14 @@
             <li><%= link_to "Price List" %></li>
             <li><%= link_to "Contact Us" %></li>
             <li><%= link_to "Cart" %></li>
+            <% if current_user %>
+              <li><%= image_tag current_user.image %>
+              <li>Signed in as <strong><%= current_user.name %></strong>!</li>
+              <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+            <% else %>
+              <li><%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %></li>
+            <% end %>
+
           </ul>
         </div>
       </div>

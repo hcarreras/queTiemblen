@@ -10,6 +10,17 @@ Quetiemblen::Application.routes.draw do
 
   resources :brands
   resources :products
+ # resources :sessions
+
+  root to: 'catalog#index'
+
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+ # get "signout" => "sessions#destroy", :as => "signout"
+
+
+ # get "singout" => "sessions#destroy", :as => "signout"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

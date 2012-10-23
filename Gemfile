@@ -36,6 +36,9 @@ gem 'will_paginate', '~> 3.0.0'
 
 gem 'therubyracer', '~> 0.11.0beta5'
 
+gem 'omniauth-facebook', '1.4.0'
+ 
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
