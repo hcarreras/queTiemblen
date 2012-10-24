@@ -1,7 +1,15 @@
 <div class="well" id = "<%= comment.id %>" >
-	<b><%= comment.title %></b>
-	<p></p>
-	<%= simple_format comment.body %>
-	<%= link_to 'Edit', edit_comment_path(comment), :class => 'btn btn-mini btn-success' %>
-	<%= link_to 'Destroy', comment_path(comment), :format => :js, :remote => true, :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger' %>
+	<div class="row">
+	    <div class="span1.5">
+	    	<%=image_tag comment.user.image, :class => "padded-bottom" %>
+	    	<p><%= comment.user.name %><p>
+	    </div>
+	    <div class="span4">
+	    	<h3><%= comment.title %></h3>
+			<p></p>
+			<%= simple_format comment.body%>
+			<%= link_to 'Edit', edit_comment_path(comment), :class => 'btn btn-mini btn-success' %>
+			<%= link_to 'Destroy', comment_path(comment), :format => :js, :remote => true, :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => 'btn btn-mini btn-danger' %>
+		</div>
+	</div>
 </div>

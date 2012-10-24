@@ -41,6 +41,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
+    @comment.user = current_user
 
     @comment.save!
 

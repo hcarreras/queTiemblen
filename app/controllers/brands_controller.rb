@@ -18,6 +18,7 @@ class BrandsController < ApplicationController
     @comments = @brand.comments
 
     respond_to do |format|
+      @comments = @comments.paginate(:page => params[:page], :per_page => 5) 
       format.html # show.html.erb
       format.json { render json: @brand }
     end

@@ -12,3 +12,17 @@
  *= require_tree .
  */
 
+.padded{
+	padding: 9px 15px 11px;
+
+}
+
+.padded-bottom{
+	padding-bottom: 10px;
+
+}
+
+.super-padded-bottom{
+	padding-bottom: 30px;
+
+}
