@@ -1,0 +1,17 @@
+<table >
+	<thead>
+  		<tr>
+	    <th>Name</th>
+  		</tr>
+	</thead>
+  <% for user in @users %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= link_to "Show", user, :class => 'btn btn-mini btn-info' %></td>
+      <td><%= link_to "Destroy", user, :class => 'btn btn-mini btn-danger', :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+
+  <% end %>
+</table>
+
+	<%= link_to "New_user", new_user_path %>

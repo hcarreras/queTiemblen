@@ -1,0 +1,26 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+<p>
+  <strong>Image:</strong>
+  <p>
+  	 <%= image_tag @user.image%>
+</p>
+<% if @user == current_user %>
+	<%= form_for @user do |f| %>
+	  <p>
+ 	   <%= f.label :image %><br />
+ 	   <%= f.file_field :image %>
+	  </p>
+	  <p><%= f.submit %></p>
+	<%end%>
+<%end%>
+<% if current_user && current_user.admin? %>
+	<p>
+	  <%= link_to "Edit", edit_user_path(@user) %> |
+	  <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %> |
+	  <%= link_to "View All", users_path %>
+	</p>
+<%end%>

@@ -1,0 +1,37 @@
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th> Name </th>
+      <% if current_user && current_user.admin %>
+      <th> Actions </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |p| %>
+    <tr>
+      <td><%= image_tag p.image_url(:thumb).to_s if p.image? %></td>
+      <td><%= link_to p.title, product_path(p) %></td>
+      <% if current_user && current_user.admin %>
+      <td>
+        <div class="btn-group">
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_product_path(p), :class => "btn btn-warning btn-small" %>
+          <button class="btn dropdown-toggle btn-warning btn-small" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu btn-danger btn-small">
+           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+           product_path(p),
+           :method => :delete,
+           :data => { :confirm => 'Are you sure?' }%>
+         </ul>
+       </div>
+     </td>
+     <% end %> 
+   </tr>
+   <%end%>
+</tbody>
+</table>
+<%= will_paginate @products %>

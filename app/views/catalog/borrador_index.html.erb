@@ -1,0 +1,50 @@
+<h1>Catalog</h1>
+
+<div class="dropdown open">
+  <ul class="nav nav-pills nav-stacked" role="menu" aria-labelledby="dLabel" id="menu1">
+  <li  class="dropdown-submenu">
+
+      <a class="dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="#">Clothes</a>
+      <ul class="dropdown-menu" id="clothes">
+       <li id="coats">Coats</li>
+       <li id="shirts">Shirts</li>
+       <li id="troussers">Troussers</li>
+       <li id="tshirts">Tshirts</li>
+      </ul>
+
+  </li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#">Electronics</a>
+    <ul class="dropdown-menu" id="electronics">
+     <li id="laptops">laptops</li>
+     <li id="phones">Phones</li>
+    </ul>
+  </li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#">Home</a>
+    <ul class="dropdown-menu" id="home">
+     <li id="lamps">Lamps</li>
+     <li id="tables">Tables</li>
+     <li id="tv">TV</li>
+    </ul>
+  </li>
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="#">Sport</a>
+    <ul class="dropdown-menu" id="sport">
+     <li id="bikes">Bikes</li>
+     <li id="ski">Ski</li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<script type="text/javascript"> 
+$("#prueba1 li").hover(
+  function () {
+    $(this).find('li').removeClass('cat-hidden');
+  },
+  function () {
+    $(prueba2).empty();
+  }
+); 
+</script>
