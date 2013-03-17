@@ -12,15 +12,16 @@ two:
   body: MyText
   product_id: 1
   brand_id: 1
-  user_id: 1
+  user_id: 2
 
 product_comment:
-  title: Product Comment
-  body: One body
+  title: ProductComment
+  body: Onebody
   product_id: 1
-  user_id: 1
+  user_id: 3
 
 brand_comment:
-  title: Brand comment
-  body: Other body
+  title: Brandcomment
+  body: Otherbody
   brand_id: 1
+  user_id: 4

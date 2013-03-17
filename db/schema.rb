@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024125314) do
+ActiveRecord::Schema.define(:version => 20130305101647) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -67,8 +67,9 @@ ActiveRecord::Schema.define(:version => 20121024125314) do
     t.datetime "updated_at",       :null => false
     t.string   "name"
     t.string   "image"
-    t.string   "mini_image"
-    t.string   "big_image"
+    t.boolean  "admin"
+    t.string   "password_hash"
+    t.string   "password_salt"
   end
 
 end

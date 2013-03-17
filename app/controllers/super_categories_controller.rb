@@ -1,6 +1,8 @@
 class SuperCategoriesController < ApplicationController
   # GET /super_categories
   # GET /super_categories.json
+  before_filter :is_admin
+
   def index
     @super_categories = SuperCategory.all
 

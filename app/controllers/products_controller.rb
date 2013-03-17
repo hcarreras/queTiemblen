@@ -2,6 +2,8 @@ require 'will_paginate/array'
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
+  before_filter :is_admin, :only => [:index, :destroy]
+
   def index
     @products = Product.all
 

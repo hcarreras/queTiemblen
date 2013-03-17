@@ -1,6 +1,9 @@
 class BrandsController < ApplicationController
   # GET /brands
   # GET /brands.json
+  before_filter :is_admin, :only => [:index, :edit, :destroy]
+
+
   def index
     @brands = Brand.all
 

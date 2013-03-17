@@ -11,17 +11,17 @@
       <% if current_user %>
         <div class = "row">
           <div class = "span2">
-            <%= image_tag current_user.big_image %>
+            <%= image_tag current_user.image %>
           </div>
           <div class = "span5">
             <div id="comment-form">
               <%= form_for @comment, :format => :js, :remote => true do |f| %>
               <%= f.hidden_field :product_id %>
               <div class="field">
-                <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words"%>
+                <%= f.text_area :title, :size => "25x1", :placeholder => "Resume your experience in a few words", :id => "title-comment"%>
               </div>        
               <div class="field">
-                <%= f.text_area :body, :size => "25x5", :placeholder => "Explain us all your experience here"%>
+                <%= f.text_area :body, :size => "25x5", :placeholder => "Explain us all your experience here", :id => "body-comment"%>
               </div>
               <div class="field">
                 <%= f.submit 'Enviar comentario', :class => 'btn btn-success' %>
@@ -43,18 +43,19 @@
           <li><%= will_paginate @comments %></li>
         </ul>
       </div>
-
-      <div class="form-actions">
-        <%= link_to t('.back', :default => t("helpers.links.back")),
-        brand_path(@product.brand), :class => 'btn'  %>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-        edit_product_path(@product), :class => 'btn' %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-        product_path(@product),
-        :method => 'delete',
-        :data => { :confirm => 'Are you sure?' },
-        :class => 'btn btn-danger' %>
-      </div>
+      <% if current_user && current_user.admin %>
+        <div class="form-actions">
+          <%= link_to t('.back', :default => t("helpers.links.back")),
+          brand_path(@product.brand), :class => 'btn'  %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_product_path(@product), :class => 'btn' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          product_path(@product),
+          :method => 'delete',
+          :data => { :confirm => 'Are you sure?' },
+          :class => 'btn btn-danger' %>
+        </div>
+      <% end %>
     </div>
 
     <div class = "span5 comments">
@@ -63,12 +64,14 @@
       </div>
       <p></p>
       <div class = "well well-hari">
-        <% @product.brand.comments[1..7].each do |brand_comment| %>
-        <div class = "separated">
-          <b><%= brand_comment.title %></b>
-          <p></p>
-          <%= simple_format brand_comment.body %>
-        </div>
+        <% if @product.brand.comments.any? %>
+          <% @product.brand.comments[1..7].each do |brand_comment| %>
+            <div class = "separated">
+              <b><%= brand_comment.title %></b>
+              <p></p>
+              <%= simple_format brand_comment.body %>
+            </div>
+          <% end %> 
         <% end %>
       </div>
     </div>

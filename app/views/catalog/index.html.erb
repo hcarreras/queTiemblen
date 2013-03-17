@@ -1,25 +1,24 @@
 <h1>Catalog</h1>
-
 <p></p>
 <div class="tabbable tabs-left" >
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs" id="first">
     <% @super_categories.each do |sc| %>
       <li><%= link_to sc.name, "#" + sc.name.to_s, :data => {:toggle => "tab"} %></li>
     <% end %>
   </ul>
   <div class="tabbable tabs-left">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" id="second">
       <div class="tab-content">
         <% @super_categories.each do |sc| %>
           <div id = <%=sc.name.to_s%> class = "tab-pane">
             <% sc.categories.each do |cat|%>
-              <li><%= link_to cat.name, "#" + cat.name.to_s, :data => {:toggle => "tab"} %></li>
+              <li class="nav"><%= link_to cat.name, "#" + cat.name.to_s, :data => {:toggle => "tab"} %></li>
             <% end %>
           </div>
         <% end %>
       </div>
     </ul>
-    <div class="tab-content">
+    <div class="tab-content" id="third">
       <% @super_categories.each do |sc| %>
         <% sc.categories.each do |cat|%>
           <div id = <%=cat.name.to_s%> class = "tab-pane"> 
@@ -33,5 +32,25 @@
   </div>
 </div>
 
+<script type="text/javascript"> 
+$('.nav-tabs > li > a').hover( 
+  function(){
+      $('#third > div.active').removeClass('active');
+      $('#second div li.nav').removeClass('active');
+      $(this).tab('show');
+   }
+   );
 
- 
+
+$('.nav > a').hover( 
+  function(){
+      $('#third > div.active').removeClass('tab-pane active').addClass('tab-pane');
+      $('#second div li.nav').removeClass('active');    
+      $(this).tab('show');
+   }
+   );
+</script>
+
+<p></p>
+
+

@@ -4,6 +4,7 @@ class CommentTest < ActiveSupport::TestCase
   fixtures :comments
   fixtures :products
   fixtures :brands
+  fixtures :users
 
   test "Comments attributes must not be empty" do
   	comment = Comment.new
@@ -12,7 +13,7 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   test "Title comment must lenth between 2 and 30" do
-    comment = Comment.new(:title => "a", :product_id => comments(:product_comment).product_id)
+    comment = Comment.new(:title => "a", :product_id => comments(:product_comment).product_id, :user_id => users(:normal).id)
     assert !comment.save
     comment.title = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     assert !comment.save
@@ -21,13 +22,13 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   test "Comments must have a valid product or valid brand" do
-    comment = Comment.new(:title => "Just a test")
+    comment = Comment.new(:title => "Just a test", :user_id => users(:facebook).id)
     assert !comment.save
 
     comment.product_id = comments(:product_comment).product_id
     assert comment.save
 
-    comment2 = Comment.new(:title => "Another thest")
+    comment2 = Comment.new(:title => "Another thest", :user_id => users(:normal).id)
     assert !comment2.save
 
     comment2.brand_id = comments(:brand_comment).brand_id

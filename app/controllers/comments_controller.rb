@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
+  before_filter :is_admin, :only => [:index, :show]
+
   def index
     @comments = Comment.all
 

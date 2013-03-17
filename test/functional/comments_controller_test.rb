@@ -5,6 +5,13 @@ class CommentsControllerTest < ActionController::TestCase
     @comment = comments(:one)
     @product_comment = comments(:product_comment)
     @brand_comment = comments(:brand_comment)
+
+    @setup_brand ={
+      :title => 'Brandcomment',
+      :body => 'Otherbody',
+      :brand_id => @brand_comment.brand_id,
+      :user_id => @brand_comment.user_id
+    }
   end
 
   test "should get index" do
@@ -20,13 +27,13 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should create brand comment" do
     assert_difference('Comment.count') do
-      xhr :post, :create, comment: { title: @brand_comment.title, body: @brand_comment.body, brand_id: @brand_comment.brand_id, user_id: @brand_comment.user_id }
+      post :create, :comment => @setup_brand
     end
   end
 
   test "should create product comment" do
     assert_difference('Comment.count') do
-      xhr :post, :create, comment: { title: @product_comment.title, body: @product_comment.body, product_id: @product_comment.product_id, user_id: @product_comment.user_id }
+      post :create, :comment => @product_comment
     end
   end
 

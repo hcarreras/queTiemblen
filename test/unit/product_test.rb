@@ -61,7 +61,7 @@ class ProductTest < ActiveSupport::TestCase
     product = Product.new(:title => "towell", :brand_id => brand.id, :category_id => category.id )
     assert product.save
 
-    #If the brand don't belongs to that category, then automatically be included
+    #If the brand don't belongs to that category, then automatically is included
     assert brand.category_ids.include?(category.id)
   end
 end

@@ -28,6 +28,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
+  def default_url
+    [version_name, "pre.png"].compact.join('_')
+  end
+
   # Process files as they are uploaded:
   process :resize_to_limit => [200, 200]
   #
@@ -37,8 +41,13 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_limit => [75, 75]
+    process :resize_to_limit => [120, 120]
   end
+
+  version :mini do
+    process :resize_to_fill => [35, 35]
+  end
+
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -51,5 +60,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+
 
 end

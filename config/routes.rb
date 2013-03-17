@@ -3,20 +3,24 @@ Quetiemblen::Application.routes.draw do
   resources :comments
 
   get "catalog" => "catalog#index", :as => "catalog"
+  get "users/index"
+
 
   resources :super_categories
 
   resources :categories
-
+  resources :users
   resources :brands
   resources :products
- # resources :sessions
+  resources :sessions
 
   root to: 'catalog#index'
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
+  match "sign_up" => "users#new", :as => "sign_up"
+
  # get "signout" => "sessions#destroy", :as => "signout"
 
 
