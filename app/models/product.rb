@@ -10,4 +10,13 @@ class Product < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => { :scope => :brand_id, :case_sensitive => false, :message => 'The product already exists' }
   validates :brand, :presence => {:message => 'The brand no exists'}
   validates :category, :presence => {:message => 'The category no exists'}
+
+
+  def self.search(search)
+		if search
+		  where('title LIKE ?', "%#{search}%")
+		else
+		  scoped
+		end
+	end
 end

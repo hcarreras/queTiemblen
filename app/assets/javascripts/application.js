@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+$(function() {
+  $("#products .pagination a").live("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $("#products_search input").keyup(function() {
+    $.get($("#products_search").attr("action"), $("#products_search").serialize(), null, "script");
+    return false;
+  });
+});
