@@ -7,10 +7,6 @@ class BrandsController < ApplicationController
   def index
     @brands = Brand.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @brands }
-    end
   end
 
   # GET /brands/1
@@ -19,13 +15,7 @@ class BrandsController < ApplicationController
     @brand = Brand.find(params[:id])
     @products = @brand.products.search(params[:search]).paginate(:page => params[:page], :per_page => 3)
     @comment = Comment.new(:brand_id => @brand.id)
-    @comments = @brand.comments
-
-    respond_to do |format|
-      @comments = @comments.paginate(:page => params[:page], :per_page => 5) 
-      format.html # show.html.erb
-      format.json { render json: @brand }
-    end
+    @comments = @brand.comments.paginate(:page => params[:page], :per_page => 5) 
   end
 
   # GET /brands/new

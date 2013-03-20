@@ -5,13 +5,9 @@ class ProductsController < ApplicationController
   before_filter :is_admin, :only => [:index, :destroy]
 
   def index
-    @products = Product.all
+    @products = Product.all.paginate(:page => params[:page], :per_page => 10)
 
-    respond_to do |format|
-      @products = @products.paginate(:page => params[:page], :per_page => 10)
-      format.html # index.html.erb
-      format.json { render json: @products }
-    end
+
   end
 
   # GET /products/1
@@ -19,14 +15,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @comment = Comment.new(:product_id => @product.id)
-    @comments = @product.comments    
-
-
-    respond_to do |format|
-      @comments = @comments.paginate(:page => params[:page], :per_page => 5)      
-      format.html # show.html.erb
-      format.json { render json: @product }
-    end
+    @comments = @product.comments.paginate(:page => params[:page], :per_page => 5)    
   end
 
   # GET /products/new

@@ -21,6 +21,7 @@ Quetiemblen::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
   match "sign_up" => "users#new", :as => "sign_up"
 
+
  # get "signout" => "sessions#destroy", :as => "signout"
 
 

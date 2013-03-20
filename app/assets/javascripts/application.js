@@ -15,13 +15,26 @@
 //= require twitter/bootstrap
 //= require_tree .
 
+
+//$(function() {
+//$(document).on("click","#products .pagination a", function() {
+//$.getScript(this.href);
+//return false;
+//});
+//$("#products_search input").keyup(function() {
+//$.get($("#products_search").attr("action"), $("#products_search").serialize(), null, "script");
+//return false;
+//});
+//});
+
 $(function() {
-  $("#products .pagination a").live("click", function() {
+  $("#products .pagination a").on("click", function() {
     $.getScript(this.href);
     return false;
   });
+
   $("#products_search input").keyup(function() {
-    $.get($("#products_search").attr("action"), $("#products_search").serialize(), null, "script");
+    $.getScript($("#products_search").attr("action"), $("#products_search").serialize(), null, "script");
     return false;
   });
 });
