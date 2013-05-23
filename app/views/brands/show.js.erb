@@ -1,4 +1,16 @@
-$("#comments").append("<%= j ( render @comments) %>");
-$(".pagination").replaceWith("<%= j will_paginate @comments) %>");
-$('#products').html('<%= escape_javascript(render :partial => "products" %>');
+//Endless comment pagination
+
+
+
+	$("#comments").append("<%= j ( render @comments) %>");
+	<% if @comments.next_page %>
+		$(".pagination").replaceWith("<%= j will_paginate @comments %>");
+
+	<% end %>
+
+	//Product pagination
+	$('#products').html('<%= escape_javascript(render :partial => "products") %>');
+	//I put this because if I didn't, ajax just works once.
+	$('.pagination a').attr('data-remote', 'true');
+
 

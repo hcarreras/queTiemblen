@@ -29,7 +29,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   def default_url
-    [version_name, "pre.png"].compact.join('_')
+    "/uploads/" + [version_name, "pre.png"].compact.join('_')
   end
 
   # Process files as they are uploaded:

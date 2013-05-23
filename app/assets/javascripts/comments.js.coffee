@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-	$(window).scroll ->
-		if $(window).scrollTop() > $(document).height() - $(window).height() - 50
-			$.getScript($('.pagination .next_page').attr('href'))
+	if $('.pagination').length
+		$(window).scroll ->
+			url = $('.pagination .next_page').attr('href')
+			if url && $(window).scrollTop() > $(document).height() - $(window).height() - 70
+				$.getScript(url)
+		$(window).scroll()

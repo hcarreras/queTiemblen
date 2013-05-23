@@ -13,9 +13,13 @@ class BrandsController < ApplicationController
   # GET /brands/1.json
   def show
     @brand = Brand.find(params[:id])
-    @products = @brand.products.search(params[:search]).paginate(:page => params[:page], :per_page => 3)
+    @products = @brand.products.search(params[:search]).paginate(:page => params[:product_page], :per_page => 3)
     @comment = Comment.new(:brand_id => @brand.id)
-    @comments = @brand.comments.paginate(:page => params[:page], :per_page => 5) 
+    @comments = @brand.comments.paginate(:page => params[:comment_page], :per_page => 5) 
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /brands/new

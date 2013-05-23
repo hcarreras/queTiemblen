@@ -34,12 +34,14 @@
     <% end %>    
 
     <div id="comments">
+
       <%= render  @comments %>
+
     </div>
     <p></p>
     <div class="pager">
         <ul>
-        <li><%= will_paginate @comments %></li>
+        <li><%= will_paginate @comments, :param_name => 'comment_page' %></li>
       </ul>
     </div>
   </div>
@@ -85,3 +87,9 @@
     :class => 'btn btn-danger' %>
   </div>
   <%end%>
+
+
+
+
+
+
